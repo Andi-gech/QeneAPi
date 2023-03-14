@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
+import cloudinary.api
+import cloudinary.uploader
+
 
 from datetime import timedelta
 import os
@@ -25,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(5&bb$zehlq(o%%k&cz80#o%(y1uuteudwl1s+9&u%i(-(d*0n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "corsheaders",
+     'cloudinary',
     'rest_framework',
     'djoser',
     'mainapp',
@@ -125,8 +130,14 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL='/media/'
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
 
-
+cloudinary.config(
+  cloud_name= "dlrx3l1zp",
+  api_key= "362394574787881",
+  api_secret= "gSbBNI0DiEMv8_xZ4XSJWD9YKho"
+  
+)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

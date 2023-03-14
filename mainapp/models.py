@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from cloudinary.models import CloudinaryField
 # Create your models here.
 class Profile(models.Model):
     ROLE = [
@@ -9,7 +9,7 @@ class Profile(models.Model):
         ('teacher', 'Teacher'),
     ]
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    profile_pic=models.ImageField(upload_to='user/profile_pic',null=True)
+    profile_pic=CloudinaryField('image',null=True,blank=True )
     role = models.CharField(
         max_length=10,
         choices=ROLE,
@@ -20,7 +20,7 @@ class Profile(models.Model):
 
 class Course(models.Model):
     Course_name=models.CharField(max_length=255)
-    course_image=models.ImageField(upload_to='courses/image',null=True)
+    course_image=CloudinaryField('image',null=True,blank=True )
     Teacher=models.ForeignKey(Profile,on_delete=models.CASCADE)
     description=models.TextField()
     def __str__(self) :
@@ -46,7 +46,7 @@ class Course_details(models.Model):
     courseoutlinee=models.ForeignKey(course_outlines, on_delete=models.CASCADE)
     text_content=models.TextField(null=True,blank=True)
     code_content=models.TextField(null=True,blank=True)
-    image_content=models.ImageField(upload_to='course/contentimage' ,null=True,blank=True)
+    image_content= CloudinaryField('image',null=True,blank=True )
     def __str__(self) :
         return self.text_content
 
